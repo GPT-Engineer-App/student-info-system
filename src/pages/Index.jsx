@@ -90,7 +90,11 @@ const Index = () => {
                 <Td>{student.name}</Td>
                 <Td>{student.age}</Td>
                 <Td>{student.grade}</Td>
-                <Td>{attendance[index] && attendance[index].includes(new Date().toISOString().split("T")[0]) ? "Present" : "Absent"}</Td>
+                <Td>
+                  <Checkbox isChecked={attendance[index] && attendance[index].includes(new Date().toISOString().split("T")[0])} onChange={() => handleAttendanceChange(index, new Date().toISOString().split("T")[0])}>
+                    Present
+                  </Checkbox>
+                </Td>
                 <Td>
                   <HStack spacing={2}>
                     <IconButton aria-label="Edit" icon={<FaEdit />} onClick={() => handleEditStudent(index)} />
