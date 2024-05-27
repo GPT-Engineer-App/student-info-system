@@ -70,7 +70,9 @@ const Index = () => {
         </HStack>
         <HStack spacing={4} width="100%">
           <Text fontSize="lg">Mark Attendance for Today:</Text>
-          <Checkbox onChange={() => handleAttendanceChange(editIndex, new Date().toISOString().split("T")[0])}>Present</Checkbox>
+          <Checkbox isDisabled={!name || !age || !grade} onChange={() => handleAttendanceChange(editIndex, new Date().toISOString().split("T")[0])}>
+            Present
+          </Checkbox>
         </HStack>
         <Table variant="simple" width="100%">
           <Thead>
