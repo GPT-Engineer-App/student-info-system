@@ -11,6 +11,10 @@ const Index = () => {
   const [attendance, setAttendance] = useState({});
 
   const handleAddStudent = () => {
+    if (editIndex !== null) {
+      handleUpdateStudent(editIndex);
+      return;
+    }
     const updatedAttendance = { ...attendance };
     const currentDate = new Date().toISOString().split("T")[0];
     if (editIndex !== null) {
@@ -30,10 +34,16 @@ const Index = () => {
   };
 
   const handleEditStudent = (index) => {
-    setEditIndex(index);
-    setName(students[index].name);
-    setAge(students[index].age);
-    setGrade(students[index].grade);
+    setEditIndex(index === editIndex ? null : index);
+  };
+
+  const handleUpdateStudent = (index) => {
+    const updatedStudents = students.map((student, i) => (i === index ? { name, age, grade } : student));
+    setStudents(updatedStudents);
+    setEditIndex(null);
+    setName("");
+    setAge("");
+    setGrade("");
   };
 
   const handleDeleteStudent = (index) => {
@@ -87,9 +97,9 @@ const Index = () => {
           <Tbody>
             {students.map((student, index) => (
               <Tr key={index}>
-                <Td>{student.name}</Td>
-                <Td>{student.age}</Td>
-                <Td>{student.grade}</Td>
+                <Td>{editIndex === index ? <Input value={name} onChange={(e) => setName(e.target.value)} /> : student.name}</Td>
+                <Td>{editIndex === index ? <Input value={age} onChange={(e) => setAge(e.target.value)} /> : student.age}</Td>
+                <Td>{editIndex === index ? <Input value={grade} onChange={(e) => setGrade(e.target.value)} /> : student.grade}</Td>
                 <Td>
                   <Checkbox isChecked={attendance[index] && attendance[index].includes(new Date().toISOString().split("T")[0])} onChange={() => handleAttendanceChange(index, new Date().toISOString().split("T")[0])}>
                     Present
@@ -97,7 +107,7 @@ const Index = () => {
                 </Td>
                 <Td>
                   <HStack spacing={2}>
-                    <IconButton aria-label="Edit" icon={<FaEdit />} onClick={() => handleEditStudent(index)} />
+                    {editIndex === index ? <Button onClick={() => handleUpdateStudent(index)}>Update</Button> : <IconButton aria-label="Edit" icon={<FaEdit />} onClick={() => handleEditStudent(index)} />}
                     <IconButton aria-label="Delete" icon={<FaTrash />} onClick={() => handleDeleteStudent(index)} />
                   </HStack>
                 </Td>
