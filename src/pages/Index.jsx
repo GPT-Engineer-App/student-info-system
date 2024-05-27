@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Container, VStack, HStack, Input, Button, Table, Thead, Tbody, Tr, Th, Td, IconButton, Text, Checkbox, Box } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { FaTrash, FaEdit } from "react-icons/fa";
 
 const Index = () => {
