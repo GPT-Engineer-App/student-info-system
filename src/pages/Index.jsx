@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, VStack, HStack, Input, Button, Table, Thead, Tbody, Tr, Th, Td, IconButton, Text, Checkbox } from "@chakra-ui/react";
+import { Container, VStack, HStack, Input, Button, Table, Thead, Tbody, Tr, Th, Td, IconButton, Text, Checkbox, Box } from "@chakra-ui/react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 
 const Index = () => {
@@ -69,9 +69,14 @@ const Index = () => {
   const totalPresent = Object.values(attendance).filter((dates) => dates.includes(new Date().toISOString().split("T")[0])).length;
   const totalNotPresent = students.length - totalPresent;
 
+  const currentDate = new Date().toLocaleDateString();
+
   return (
     <Container centerContent maxW="container.md" py={8}>
       <VStack spacing={4} width="100%">
+        <Box width="100%" textAlign="center" mb={4}>
+          <Text fontSize="lg">Current Date: {currentDate}</Text>
+        </Box>
         <Text fontSize="2xl" mb={4}>
           Student Information System
         </Text>
