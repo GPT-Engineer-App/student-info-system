@@ -35,7 +35,17 @@ const Index = () => {
   };
 
   const handleEditStudent = (index) => {
-    setEditIndex(index === editIndex ? null : index);
+    if (index === editIndex) {
+      setEditIndex(null);
+      setName("");
+      setAge("");
+      setGrade("");
+    } else {
+      setEditIndex(index);
+      setName(students[index].name);
+      setAge(students[index].age);
+      setGrade(students[index].grade);
+    }
   };
 
   const handleUpdateStudent = (index) => {
