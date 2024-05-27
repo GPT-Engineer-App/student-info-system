@@ -66,12 +66,19 @@ const Index = () => {
     setAttendance(updatedAttendance);
   };
 
+  const totalPresent = Object.values(attendance).filter((dates) => dates.includes(new Date().toISOString().split("T")[0])).length;
+  const totalNotPresent = students.length - totalPresent;
+
   return (
     <Container centerContent maxW="container.md" py={8}>
       <VStack spacing={4} width="100%">
         <Text fontSize="2xl" mb={4}>
           Student Information System
         </Text>
+        <HStack spacing={4} width="100%">
+          <Text fontSize="lg">Total Present: {totalPresent}</Text>
+          <Text fontSize="lg">Total Not Present: {totalNotPresent}</Text>
+        </HStack>
         <HStack spacing={4} width="100%">
           <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
           <Input placeholder="Age" value={age} onChange={(e) => setAge(e.target.value)} />
