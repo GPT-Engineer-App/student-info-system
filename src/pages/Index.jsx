@@ -12,15 +12,17 @@ const Index = () => {
 
   const handleAddStudent = () => {
     const updatedAttendance = { ...attendance };
+    const currentDate = new Date().toISOString().split("T")[0];
     if (editIndex !== null) {
       updatedAttendance[editIndex] = updatedAttendance[editIndex] || [];
+      updatedAttendance[editIndex].push(currentDate);
       const updatedStudents = students.map((student, index) => (index === editIndex ? { name, age, grade } : student));
       setStudents(updatedStudents);
       setEditIndex(null);
     } else {
       setStudents([...students, { name, age, grade }]);
+      updatedAttendance[students.length] = [currentDate];
     }
-    updatedAttendance[students.length] = [];
     setAttendance(updatedAttendance);
     setName("");
     setAge("");
